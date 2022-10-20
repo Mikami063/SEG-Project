@@ -1,5 +1,7 @@
 package com.uottawa.segproject;
 
+import android.os.Build;
+
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -58,86 +60,80 @@ public class CookAccount extends Account{
 	 */
 	public void setChequeImage(String filePath) throws IOException{
 		File chequePath = new File(filePath);
-		chequeImageToData = Files.readAllBytes(chequePath.toPath());
+
+		// This way of converting images to byte array must be performed on
+		// Android 8.0 or higher
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+			chequeImageToData = Files.readAllBytes(chequePath.toPath());
+		}
 	}
 	
 	/**
 	 * This method sets a short description of a cook
 	 * 
 	 * @param description A new description
-	 * @return A string indicating that the description is updated
 	 */
-	public String setDescription(String description) {
+	public void setDescription(String description) {
 		this.description = description;
-		return "New description set to: " + this.description;
 	}
 	
 	/**
 	 * This method sets the first name of a cook
 	 * 
 	 * @param firstName A new first name
-	 * @return A string indicating that the first name is updated
 	 */
 	@Override
-	public String setFirstName(String firstName) {
+	public void setFirstName(String firstName) {
 		this.firstName = firstName;
-		return "First name changed to: " + this.firstName;
 	}
 	
 	/**
 	 * This method sets the last name of a cook
 	 * 
 	 * @param lastName A new last name
-	 * @return A string indicating that the last name is updated
 	 */
 	@Override
-	public String setLastName(String lastName) {
+	public void setLastName(String lastName) {
 		this.lastName = lastName;
-		return "Last name changed to: " + this.firstName;
 	}
 	/**
 	 * This method sets the password of a cook
 	 * 
 	 * @param password A new password
-	 * @return A string indicating that the password is updated
 	 */
 	@Override
-	public String setPassword(String password) {
+	public void setPassword(String password) {
 		this.password = password;
-		return "Password changed to: " + this.password;
 	}
 	
 	/**
 	 * This method sets the address of a cook
 	 * 
 	 * @param address A new address
-	 * @return A string indicating that the address is updated
 	 */
 	@Override
-	public String setAddress(String address) {
+	public void setAddress(String address) {
 		this.address = address;
-		return "Address changed to: " + this.address;
 	}
-	
 	/**
 	 * This method will retrieve and return the void cheque image
 	 * as a byte array
-	 * 
+	 *
 	 * @return The byte array that represents the void cheque image
 	 */
 	public byte[] getChequeImageAsData() {
 		return chequeImageToData;
 	}
-	
+
 	/**
 	 * This method will retrieve the short description of the cook
-	 * 
+	 *
 	 * @return The the short description of the cook
 	 */
 	public String getDescription() {
 		return description;
 	}
-	
+
 	/**
 	 * This method will retrieve the first name of the cook
 	 * 
