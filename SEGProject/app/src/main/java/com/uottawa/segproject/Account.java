@@ -4,7 +4,7 @@ package com.uottawa.segproject;
  * This class permits the creation of an account containing information, 
  * such as legal name (first and last), email address, account name(email address),
  * password, and address. In addition, the class supports some basic functions 
- * such as setting and changing the various attributes of the account, and 
+ * such as setting and changing the various attributes of the account and
  * retrieving information about a given account.
  * 
  * @author Ziran Wei (300188723)
@@ -62,31 +62,23 @@ public abstract class Account {
 
 	/**
 	 * This method sets the first name of the person who created the account
-	 * 
-	 * @return A string indicating that a new first name is set
 	 */
-	public abstract String setFirstName(String firstName);
+	public abstract void setFirstName(String firstName);
 
 	/**
 	 * This method sets the last name of the person who created the account
-	 * 
-	 * @return A string indicating that a new last name is set
 	 */
-	public abstract String setLastName(String lastName);
+	public abstract void setLastName(String lastName);
 
 	/**
 	 * This method sets the password of the account
-	 * 
-	 * @return A string indicating that a new password is set
 	 */
-	public abstract String setPassword(String password);
+	public abstract void setPassword(String password);
 
 	/**
 	 * This method sets the address of the person who created the account
-	 * 
-	 * @return A string indicating that a new address is set
 	 */
-	public abstract String setAddress(String address);
+	public abstract void setAddress(String address);
 
 	/**
 	 * This method will return the first name of the person who made the account

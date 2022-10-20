@@ -43,47 +43,39 @@ public class ClientAccount extends Account {
 	 * This method sets credit card number of a client
 	 * 
 	 * @param creditCard A new credit card number
-	 * @return A string indicating that the credit card number is updated
 	 */
-	public String setCreditCard(long creditCard) {
+	public void setCreditCard(long creditCard) {
 		this.creditCard = creditCard;
-		return "Credit card changed to: " + this.creditCard;
 	}
 
 	/**
 	 * This method sets the first name of a client
 	 * 
 	 * @param firstName A new first name
-	 * @return A string indicating that the first name is updated
 	 */
 	@Override
-	public String setFirstName(String firstName) {
+	public void setFirstName(String firstName) {
 		this.firstName = firstName;
-		return "First name changed to: " + this.firstName;
 	}
 
 	/**
 	 * This method sets the last name of a client
 	 * 
 	 * @param lastName A new last name
-	 * @return A string indicating that the last name is updated
 	 */
 	@Override
-	public String setLastName(String lastName) {
+	public void setLastName(String lastName) {
 		this.lastName = lastName;
-		return "Last name changed to: " + this.firstName;
 	}
 
 	/**
 	 * This method sets the password of a client
 	 * 
 	 * @param password A new password
-	 * @return A string indicating that the password is updated
 	 */
 	@Override
-	public String setPassword(String password) {
+	public void setPassword(String password) {
 		this.password = password;
-		return "Password changed to: " + this.password;
 	}
 
 	/**
@@ -93,9 +85,8 @@ public class ClientAccount extends Account {
 	 * @return A string indicating that the address is updated
 	 */
 	@Override
-	public String setAddress(String address) {
+	public void setAddress(String address) {
 		this.address = address;
-		return "Address changed to: " + this.address;
 	}
 
 	/**
