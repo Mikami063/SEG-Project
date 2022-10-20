@@ -3,6 +3,7 @@ package com.uottawa.segproject;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -37,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
             tempOut=tempOut+TA+"; ";
         }
         textView.setText(tempOut);
+
     }
 
     public void getAccountData(){//helper method for btnGetAccountsClick
@@ -68,10 +70,18 @@ public class MainActivity extends AppCompatActivity {
     private void insertAccountData(){
         String name=etName.getText().toString();
         String password=etPassword.getText().toString();
-        TempAccount TA=new TempAccount(name,password);//a dummy class for testing
+        TempAccount TA=new TempAccount(name,password, "Customer");//a dummy class for testing
 
         accountsDbRef.push().setValue(TA);// add this dummy class to the database
         Toast.makeText(MainActivity.this,"data inserted",Toast.LENGTH_SHORT).show();//show a success message if success
     }
+
+
+    public void btnSignUpClick(View view){
+        Intent intent = new Intent(this, SignUpActivity.class);
+        startActivity(intent);
+    }
+
+
 
 }

@@ -1,6 +1,6 @@
 package com.uottawa.segproject;
 
-public class AdministratorAccount extends Account {
+public class AdministratorAccount  {//entends account
     private String username;
     private String password;
     private String name;
