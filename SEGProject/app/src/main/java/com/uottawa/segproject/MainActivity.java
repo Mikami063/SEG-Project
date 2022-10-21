@@ -10,11 +10,14 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.database.annotations.Nullable;
 
 import java.util.ArrayList;
 
@@ -23,6 +26,9 @@ public class MainActivity extends AppCompatActivity {
     DatabaseReference accountsDbRef;
     EditText etName,etPassword;
     ArrayList<String> list= new ArrayList<>();//temperate list that store accounts information locally
+    ArrayList<Account> accountList = new ArrayList<>();
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +65,37 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    public void getAccountData(String accountName){
+        Query mQuery = accountsDbRef.orderByChild("AccountName").equalTo(accountName);
+        mQuery.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                Account ob = snapshot.getValue(Account.class);
+                accountList.add(ob);
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
     //summit the data to database
     public void btnSummitClick(View view){
         etName=(EditText) findViewById(R.id.TextName);
@@ -80,6 +117,15 @@ public class MainActivity extends AppCompatActivity {
     public void btnSignUpClick(View view){
         Intent intent = new Intent(this, SignUpActivity.class);
         startActivity(intent);
+    }
+
+    public void onBtnLogin(View view){
+        EditText login = findViewById(R.id.TextName);
+        EditText pass = findViewById(R.id.TextPassword);
+        String loginName = login.getText().toString();
+        String passName = login.getText().toString();
+
+        getAccountData(loginName);
     }
 
 

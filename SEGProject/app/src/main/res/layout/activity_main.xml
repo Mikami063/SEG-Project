@@ -42,7 +42,8 @@
         android:onClick="btnSummitClick"
         android:text="submit"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        />
 
     <Button
         android:id="@+id/button2"
@@ -80,6 +81,7 @@
         android:layout_marginStart="159dp"
         android:layout_marginTop="33dp"
         android:text="Login"
+        android:onClick="onBtnLogin"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/TextPassword" />
 
