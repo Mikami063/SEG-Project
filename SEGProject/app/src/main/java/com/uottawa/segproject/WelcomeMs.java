@@ -5,8 +5,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
+
 
 public class WelcomeMs extends AppCompatActivity {
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,5 +26,8 @@ public class WelcomeMs extends AppCompatActivity {
 
     public void onBackClick(View view) {
         backToMain();
+    }
+
+    public void roleChecking(View view){
     }
 }
