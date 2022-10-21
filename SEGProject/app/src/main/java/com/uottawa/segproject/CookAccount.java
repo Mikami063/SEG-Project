@@ -45,9 +45,11 @@ public class CookAccount extends Account{
 			String email, 
 			String password, 
 			String address,
-			String description) {
+			String description,
+					   String filePath) throws IOException {
 		super(firstName, lastName, email, password, address);
 		this.description = description;
+		setChequeImage(filePath);
 	}
 	
 	/**

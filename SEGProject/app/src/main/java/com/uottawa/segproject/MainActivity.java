@@ -58,27 +58,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
-    //summit the data to database
-    public void btnSummitClick(View view){
-        etName=(EditText) findViewById(R.id.TextName);
-        etPassword=(EditText) findViewById(R.id.TextPassword);
-        accountsDbRef= FirebaseDatabase.getInstance().getReference().child("Accounts");// get collection [Accounts] on database
-        insertAccountData();
-    }
-    //helper method for btnSummitClick
-    private void insertAccountData(){
-        String name=etName.getText().toString();
-        String password=etPassword.getText().toString();
-        TempAccount TA=new TempAccount(name,password, "Customer");//a dummy class for testing
-
-        accountsDbRef.push().setValue(TA);// add this dummy class to the database
-        Toast.makeText(MainActivity.this,"data inserted",Toast.LENGTH_SHORT).show();//show a success message if success
-    }
-
-
-    public void btnSignUpClick(View view){
+    public void btnSignUpClientClick(View view){
         Intent intent = new Intent(this, SignUpActivity.class);
+        startActivity(intent);
+    }
+
+    public void btnSignUpCookClick(View view){
+        Intent intent = new Intent(this, SignUpActivity2.class);
         startActivity(intent);
     }
 
