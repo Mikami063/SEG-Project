@@ -30,9 +30,17 @@
             android:text="You are login as"
             android:textSize="24sp" />
 
+        <TextView
+            android:id="@+id/textView10"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:hint="Role"
+            android:textSize="24sp" />
+
         <Space
             android:layout_width="match_parent"
-            android:layout_height="531dp" />
+            android:layout_height="489dp" />
 
         <Button
             android:id="@+id/button3"
