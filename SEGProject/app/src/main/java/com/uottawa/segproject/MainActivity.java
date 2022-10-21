@@ -1,6 +1,7 @@
 package com.uottawa.segproject;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -10,19 +11,23 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Queue;
 
 public class MainActivity extends AppCompatActivity {
 
     DatabaseReference accountsDbRef;
     EditText etName,etPassword;
     ArrayList<String> list= new ArrayList<>();//temperate list that store accounts information locally
+    ArrayList<Account> li= new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void btnGetAccountsClick(View view){//output accounts data as text
         TextView textView=(TextView)findViewById(R.id.textView);
-        getAccountData();
+        getAccountData("toha");
         String tempOut="";
         for(String TA:list){
             tempOut=tempOut+TA+"; ";
@@ -41,22 +46,59 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void getAccountData(){//helper method for btnGetAccountsClick
+    public void getAccountData(String name){//helper method for btnGetAccountsClick
         accountsDbRef=FirebaseDatabase.getInstance().getReference().child("Accounts");
-        accountsDbRef.addValueEventListener(new ValueEventListener() {
+
+        Query myQue=accountsDbRef.orderByChild("name").equalTo(name);
+        myQue.addChildEventListener(new ChildEventListener() {
+
             @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                list.clear();//refresh the list every update
-                for(DataSnapshot snapshot1: snapshot.getChildren()){//get each object under accounts collection from database
-                    list.add(snapshot1.getValue().toString());//add them to the local list of accounts
-                }
+            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                Object ob= snapshot.getValue();
+                System.out.println("here: "+snapshot.getKey()+" "+snapshot.getValue());
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
+
+
         });
+
+
+//        accountsDbRef.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                list.clear();//refresh the list every update
+//                li.clear();
+//                for(DataSnapshot snapshot1: snapshot.getChildren()){//get each object under accounts collection from database
+//                    list.add(snapshot1.getValue().toString());//add them to the local list of accounts
+//                    Account obj=snapshot1.getValue(Account.class);
+//                    li.add(snapshot1.getValue(Account.class));
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//
+//            }
+//        });
     }
 
     //summit the data to database
