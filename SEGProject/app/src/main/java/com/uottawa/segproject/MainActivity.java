@@ -17,8 +17,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
-import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.database.annotations.Nullable;
+
 
 import java.util.ArrayList;
 import java.util.Queue;
@@ -28,13 +27,13 @@ public class MainActivity extends AppCompatActivity {
     DatabaseReference accountsDbRef;
     EditText etName,etPassword;
     ArrayList<String> list= new ArrayList<>();//temperate list that store accounts information locally
-<<<<<<< HEAD
+
     ArrayList<Account> accountList = new ArrayList<>();
 
 
-=======
+
     ArrayList<Account> li= new ArrayList<>();
->>>>>>> 91d50191b3ee1d4b2bd52f7f967f1b5661c7bfff
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,40 +52,40 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void getAccountData(String name){//helper method for btnGetAccountsClick
-        accountsDbRef=FirebaseDatabase.getInstance().getReference().child("Accounts");
-
-        Query myQue=accountsDbRef.orderByChild("name").equalTo(name);
-        myQue.addChildEventListener(new ChildEventListener() {
-
-            @Override
-            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                Object ob= snapshot.getValue();
-                System.out.println("here: "+snapshot.getKey()+" "+snapshot.getValue());
-            }
-
-            @Override
-            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-
-            }
-
-            @Override
-            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-
-
-        });
+//    public void getAccountData(String name){//helper method for btnGetAccountsClick
+//        accountsDbRef=FirebaseDatabase.getInstance().getReference().child("Accounts");
+//
+//        Query myQue=accountsDbRef.orderByChild("name").equalTo(name);
+//        myQue.addChildEventListener(new ChildEventListener() {
+//
+//            @Override
+//            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+//                Object ob= snapshot.getValue();
+//                System.out.println("here: "+snapshot.getKey()+" "+snapshot.getValue());
+//            }
+//
+//            @Override
+//            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+//
+//            }
+//
+//            @Override
+//            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+//
+//            }
+//
+//            @Override
+//            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+//
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//
+//            }
+//
+//
+//        });
 
 
 //        accountsDbRef.addValueEventListener(new ValueEventListener() {
@@ -106,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
 //
 //            }
 //        });
-    }
+//    }
 
     public void getAccountData(String accountName){
         Query mQuery = accountsDbRef.orderByChild("AccountName").equalTo(accountName);
