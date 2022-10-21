@@ -157,8 +157,10 @@ public class MainActivity extends AppCompatActivity {
         EditText pass = findViewById(R.id.TextPassword);
         String loginName = login.getText().toString();
         String passName = login.getText().toString();
-
         getAccountData(loginName);
+
+        Intent intent = new Intent(this, WelcomeMs.class);
+        startActivity(intent);
     }
 
 
