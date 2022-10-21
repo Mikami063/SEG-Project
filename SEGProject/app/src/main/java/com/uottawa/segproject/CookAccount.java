@@ -1,5 +1,6 @@
 package com.uottawa.segproject;
 
+import android.graphics.Bitmap;
 import android.os.Build;
 
 import java.io.File;
@@ -27,7 +28,7 @@ public class CookAccount extends Account{
 	/**
 	 * Contains the void cheque image as byte array
 	 */
-	private byte[] chequeImageToData;
+	private Bitmap chequeImageToData;
 	
 	/**
 	 * Default constructor
@@ -46,29 +47,13 @@ public class CookAccount extends Account{
 			String password, 
 			String address,
 			String description,
-					   String filePath) throws IOException {
+					   Bitmap bp) throws IOException {
 		super(firstName, lastName, email, password, address);
 		this.description = description;
-		setChequeImage(filePath);
+		chequeImageToData = bp;
 	}
 	
-	/**
-	 * This method will accept an image of a void cheque from a specified
-	 * file path and store the given image as a byte array
-	 * 
-	 * @param filePath The file path of the void cheque image
-	 * @throws IOException In case the image file is not found or error occurs
-	 * when reading the file
-	 */
-	public void setChequeImage(String filePath) throws IOException{
-		File chequePath = new File(filePath);
 
-		// This way of converting images to byte array must be performed on
-		// Android 8.0 or higher
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-			chequeImageToData = Files.readAllBytes(chequePath.toPath());
-		}
-	}
 	
 	/**
 	 * This method sets a short description of a cook
@@ -123,7 +108,7 @@ public class CookAccount extends Account{
 	 *
 	 * @return The byte array that represents the void cheque image
 	 */
-	public byte[] getChequeImageAsData() {
+	public Bitmap getChequeImageAsData() {
 		return chequeImageToData;
 	}
 

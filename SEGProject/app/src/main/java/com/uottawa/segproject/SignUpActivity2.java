@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -27,7 +29,8 @@ import java.io.InputStream;
 public class SignUpActivity2 extends AppCompatActivity {
     DatabaseReference accountsDbRef;
     EditText etFirstname,etPassword,etLastname,etEmail,etZIP,etDescription;
-    Uri uri;
+    private static final int RESULT_LOAD_IMAGE = 1000;
+    Bitmap bp;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,15 +40,23 @@ public class SignUpActivity2 extends AppCompatActivity {
     }
 
     public void upLoadImage(View view){
-        Intent i = new Intent(Intent.ACTION_PICK);
-        i.setData(MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        startActivityForResult(i,1);
+
+        Intent i = new Intent(Intent.ACTION_PICK,android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        startActivityForResult(i, RESULT_LOAD_IMAGE);
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode,@Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-            uri = data.getData();
-    }
+        if (requestCode == RESULT_LOAD_IMAGE && resultCode == RESULT_OK && null != data) {
+            Uri selectedImage = data.getData();
+            String[] filePathColumn = { MediaStore.Images.Media.DATA };
+            Cursor cursor = getContentResolver().query(selectedImage,filePathColumn, null, null, null);
+            cursor.moveToFirst();
+            int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+            String picturePath = cursor.getString(columnIndex);
+            cursor.close();
+            bp = BitmapFactory.decodeFile(picturePath);
+    }}
 
     public void onDoneClick(View view) throws IOException {
         etFirstname=(EditText) findViewById(R.id.firstnameTxt2);
@@ -61,25 +72,7 @@ public class SignUpActivity2 extends AppCompatActivity {
         backToMain();
     }
 
-        /*convert uri to filepath
-         
-         */
-        private String getRealPathFromURI(Context context, Uri contentUri) {
-            Cursor cursor = null;
-            try {
-                String[] proj = { MediaStore.Images.Media.DATA };
-                cursor = context.getContentResolver().query(contentUri,  proj, null, null, null);
-                int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-                cursor.moveToFirst();
-                return cursor.getString(column_index);
-            } catch (Exception e) {
-                return "";
-            } finally {
-                if (cursor != null) {
-                    cursor.close();
-                }
-            }
-        }
+
 
     private void insertAccountData() throws IOException {
         String firstname=etFirstname.getText().toString();
@@ -88,11 +81,8 @@ public class SignUpActivity2 extends AppCompatActivity {
         String email=etEmail.getText().toString();
         String address=etZIP.getText().toString();
         String description=etDescription.getText().toString();
-        String filepath;
 
-        filepath = getRealPathFromURI(this, uri);
-
-        CookAccount CA = new CookAccount(firstname,lastname,email,password,address,description,filepath);
+        CookAccount CA = new CookAccount(firstname,lastname,email,password,address,description, bp);
 
         accountsDbRef.push().setValue(CA);// add this dummy class to the database
 
