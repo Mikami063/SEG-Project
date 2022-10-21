@@ -5,39 +5,32 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
+//create client account
 public class SignUpActivity extends AppCompatActivity {
     DatabaseReference accountsDbRef;
-    EditText etName,etPassword;
-    Spinner spinner;
+    EditText etFirstname,etPassword,etLastname,etEmail,etZIP,etCard;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
-
-        spinner = (Spinner) findViewById(R.id.spinner);
-// Create an ArrayAdapter using the string array and a default spinner layout
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.roles, android.R.layout.simple_spinner_item);
-// Specify the layout to use when the list of choices appears
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-// Apply the adapter to the spinner
-        spinner.setAdapter(adapter);
     }
 
 
 
     public void onDoneClick(View view){
-        etName=(EditText) findViewById(R.id.nameTxt);
+        etFirstname=(EditText) findViewById(R.id.firstnameTxt);
         etPassword=(EditText) findViewById(R.id.passwardTxt);
+        etCard=(EditText) findViewById(R.id.cardTxt);
+        etLastname=(EditText) findViewById(R.id.lastnameTxt);
+        etZIP=(EditText) findViewById(R.id.ZIPTxt);
+        etEmail=(EditText) findViewById(R.id.emailTxt);
+
         accountsDbRef= FirebaseDatabase.getInstance().getReference().child("Accounts");// get collection [Accounts] on database
         insertAccountData();
 
@@ -45,13 +38,17 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     private void insertAccountData(){
-        String name=etName.getText().toString();
+        String firstname=etFirstname.getText().toString();
+        String lastname=etLastname.getText().toString();
         String password=etPassword.getText().toString();
-        String role = spinner.getSelectedItem().toString();
+        String email=etEmail.getText().toString();
+        String address=etZIP.getText().toString();
+        long card=Long.parseLong(etCard.getText().toString());
 
-        TempAccount TA=new TempAccount(name,password, role);//a dummy class for testing
+        ClientAccount CA = new ClientAccount(firstname,lastname,email,password,address,card);
 
-        accountsDbRef.push().setValue(TA);// add this dummy class to the database
+        accountsDbRef.push().setValue(CA);// add this dummy class to the database
+
         Toast.makeText(SignUpActivity.this,"data inserted",Toast.LENGTH_SHORT).show();//show a success message if success
     }
 
