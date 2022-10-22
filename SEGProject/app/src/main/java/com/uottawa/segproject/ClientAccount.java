@@ -18,6 +18,11 @@ public class ClientAccount extends Account {
 	private long creditCard;
 
 	/**
+	 * Contains the user type of the client
+	 */
+	private String userType;
+
+	/**
 	 * Default constructor
 	 */
 	public ClientAccount() {
@@ -37,6 +42,7 @@ public class ClientAccount extends Account {
 			long creditCard) {
 		super(firstName, lastName, email, password, address);
 		this.creditCard = creditCard;
+		userType = "client";
 	}
 
 	/**
@@ -96,6 +102,15 @@ public class ClientAccount extends Account {
 	 */
 	public long getCreditCard() {
 		return creditCard;
+	}
+
+	/**
+	 * This method will retrieve the user type of the current class
+	 *
+	 * @return The user type of the current class
+	 */
+	public String getUserType(){
+		return userType;
 	}
 
 	/**

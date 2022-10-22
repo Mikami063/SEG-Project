@@ -50,11 +50,14 @@ public class SignUpActivity extends AppCompatActivity {
         String address=etZIP.getText().toString();
         long card=Long.parseLong(etCard.getText().toString());
 
+        String name = firstname+"userType";
         ClientAccount CA = new ClientAccount(firstname,lastname,email,password,address,card);
-        update.put(firstname+"/userType", "client");
+        update.put(name, "client");
         accountsDbRef.push().setValue(CA);// add this dummy class to the database
 
-        accountsDbRef.updateChildren(update);
+        DatabaseReference userReference = accountsDbRef.child(firstname);
+        userReference.updateChildren(update);
+        //accountsDbRef.updateChildren(update);
         Toast.makeText(SignUpActivity.this,"data inserted",Toast.LENGTH_SHORT).show();//show a success message if success
     }
 

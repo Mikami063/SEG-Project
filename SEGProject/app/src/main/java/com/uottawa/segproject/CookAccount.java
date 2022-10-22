@@ -29,7 +29,11 @@ public class CookAccount extends Account{
 	 * Contains the void cheque image as byte array
 	 */
 	private Bitmap chequeImageToData;
-	
+
+	/**
+	 * Contains the user type of the cook
+	 */
+	private String userType;
 	/**
 	 * Default constructor
 	 */
@@ -51,6 +55,7 @@ public class CookAccount extends Account{
 		super(firstName, lastName, email, password, address);
 		this.description = description;
 		chequeImageToData = bp;
+		userType = "cook";
 	}
 	
 
@@ -115,10 +120,19 @@ public class CookAccount extends Account{
 	/**
 	 * This method will retrieve the short description of the cook
 	 *
-	 * @return The the short description of the cook
+	 * @return The short description of the cook
 	 */
 	public String getDescription() {
 		return description;
+	}
+
+	/**
+	 * This method will return the userType of the current class
+	 *
+	 * @return The user type of the current class
+	 */
+	public String getUserType(){
+		return userType;
 	}
 
 	/**

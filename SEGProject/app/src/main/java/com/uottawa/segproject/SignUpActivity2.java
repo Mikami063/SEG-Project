@@ -85,8 +85,9 @@ public class SignUpActivity2 extends AppCompatActivity {
         String address=etZIP.getText().toString();
         String description=etDescription.getText().toString();
 
+        String updated = firstname + "/userType";
         CookAccount CA = new CookAccount(firstname,lastname,email,password,address,description, bp);
-        update.put(firstname+"/userType", "cook");
+        update.put(updated, "cook");
         accountsDbRef.push().setValue(CA);// add this dummy class to the database
         accountsDbRef.updateChildren(update);
 
