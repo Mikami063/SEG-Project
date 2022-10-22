@@ -36,6 +36,9 @@ public class SignUpClient extends AppCompatActivity {
         etZIP=(EditText) findViewById(R.id.ZIPTxt);
         etEmail=(EditText) findViewById(R.id.emailTxt);
 
+        // The try-catch will check if the user inputted all-numeric input for
+        // the client's credit card. In addition, the if-else statement will
+        // ensure that all text-fields are non-empty.
         try {
             Long.parseLong(etCard.getText().toString());
             if (!etFirstname.getText().toString().equals("") &&
@@ -73,11 +76,8 @@ public class SignUpClient extends AppCompatActivity {
 
 
             ClientAccount CA = new ClientAccount(firstname, lastname, email, password, address, card);
-            update.put(firstname + "/userType", "client");
             accountsDbRef.push().setValue(CA);// add this dummy class to the database
-
-            accountsDbRef.updateChildren(update);
-            Toast.makeText(SignUpClient.this, "data inserted", Toast.LENGTH_SHORT).show();//show a success message if success
+        Toast.makeText(SignUpClient.this, "data inserted", Toast.LENGTH_SHORT).show();//show a success message if success
 
     }
 

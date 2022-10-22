@@ -61,6 +61,7 @@ public class SignUpCook extends AppCompatActivity {
         etEmail=(EditText) findViewById(R.id.emailTxt2);
         etDescription=(EditText) findViewById(R.id.selfDescriptionTxt);
 
+        // The if-else statement will ensure that all text-fields are non-empty.
             if (!etFirstname.getText().toString().equals("") &&
                     !etLastname.getText().toString().equals("") &&
                     !etPassword.getText().toString().equals("") &&
@@ -89,11 +90,10 @@ public class SignUpCook extends AppCompatActivity {
         String address=etZIP.getText().toString();
         String description=etDescription.getText().toString();
 
-        String updated = firstname + "/userType";
+
         CookAccount CA = new CookAccount(firstname,lastname,email,password,address,description, bp);
-        update.put(updated, "cook");
+
         accountsDbRef.push().setValue(CA);// add this dummy class to the database
-        accountsDbRef.updateChildren(update);
 
         Toast.makeText(SignUpCook.this,"data inserted",Toast.LENGTH_SHORT).show();//show a success message if success
     }
