@@ -13,7 +13,7 @@
         android:theme="@style/Theme.SEGProject"
         tools:targetApi="31">
         <activity
-            android:name=".WelcomeMs"
+            android:name=".UserSession"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

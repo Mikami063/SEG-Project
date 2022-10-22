@@ -161,7 +161,7 @@ public class MainActivity extends AppCompatActivity {
         getAccountData(loginName);
 
        // Use if statement to distinguish user type
-        Intent intent = new Intent(this, WelcomeMs.class);
+        Intent intent = new Intent(this, UserSession.class);
         startActivity(intent);
     }
 
