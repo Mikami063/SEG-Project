@@ -15,6 +15,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 
 
@@ -110,7 +111,8 @@ public class MainActivity extends AppCompatActivity {
 //    }
 
     public void getAccountData(String accountName){
-        Query mQuery = accountsDbRef.orderByChild("AccountName").equalTo(accountName);
+        accountsDbRef= FirebaseDatabase.getInstance().getReference().child("Accounts");
+        Query mQuery = accountsDbRef.orderByChild("accountName").equalTo(accountName);
         mQuery.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
@@ -156,7 +158,7 @@ public class MainActivity extends AppCompatActivity {
         EditText pass = findViewById(R.id.TextPassword);
         String loginName = login.getText().toString();
         String passName = login.getText().toString();
-        //getAccountData(loginName);
+        getAccountData(loginName);
 
        // Use if statement to distinguish user type
         Intent intent = new Intent(this, WelcomeMs.class);
