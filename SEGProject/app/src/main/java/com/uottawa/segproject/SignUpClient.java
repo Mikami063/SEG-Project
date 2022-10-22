@@ -15,14 +15,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 //create client account
-public class SignUpActivity extends AppCompatActivity {
+public class SignUpClient extends AppCompatActivity {
     DatabaseReference accountsDbRef;
     EditText etFirstname,etPassword,etLastname,etEmail,etZIP,etCard;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sign_up);
+        setContentView(R.layout.activity_sign_up_client);
     }
 
 
@@ -55,7 +55,7 @@ public class SignUpActivity extends AppCompatActivity {
         accountsDbRef.push().setValue(CA);// add this dummy class to the database
 
         accountsDbRef.updateChildren(update);
-        Toast.makeText(SignUpActivity.this,"data inserted",Toast.LENGTH_SHORT).show();//show a success message if success
+        Toast.makeText(SignUpClient.this,"data inserted",Toast.LENGTH_SHORT).show();//show a success message if success
     }
 
     public void backToMain(){

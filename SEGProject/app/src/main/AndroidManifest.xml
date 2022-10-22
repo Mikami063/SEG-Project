@@ -20,14 +20,14 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".SignUpActivity2"
+            android:name=".SignUpCook"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".SignUpActivity"
+            android:name=".SignUpClient"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -23,7 +22,6 @@ import com.google.firebase.database.Query;
 
 
 import java.util.ArrayList;
-import java.util.Queue;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -143,13 +141,13 @@ public class MainActivity extends AppCompatActivity {
         });
     }
     public void btnSignUpClientClick(View view){
-        Intent intent = new Intent(this, SignUpActivity.class);
+        Intent intent = new Intent(this, SignUpClient.class);
         startActivity(intent);
     }
 
 
     public void btnSignUpCookClick(View view) {
-        Intent intent = new Intent(this, SignUpActivity2.class);
+        Intent intent = new Intent(this, SignUpCook.class);
         startActivity(intent);
 
     }

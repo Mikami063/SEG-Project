@@ -3,7 +3,6 @@ package com.uottawa.segproject;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -11,24 +10,18 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.io.ByteArrayOutputStream;
-import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
-public class SignUpActivity2 extends AppCompatActivity {
+public class SignUpCook extends AppCompatActivity {
     DatabaseReference accountsDbRef;
     EditText etFirstname,etPassword,etLastname,etEmail,etZIP,etDescription;
     private static final int RESULT_LOAD_IMAGE = 1000;
@@ -36,7 +29,7 @@ public class SignUpActivity2 extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sign_up2);
+        setContentView(R.layout.activity_sign_up_cook);
 
 
     }
@@ -90,7 +83,7 @@ public class SignUpActivity2 extends AppCompatActivity {
         accountsDbRef.push().setValue(CA);// add this dummy class to the database
         accountsDbRef.updateChildren(update);
 
-        Toast.makeText(SignUpActivity2.this,"data inserted",Toast.LENGTH_SHORT).show();//show a success message if success
+        Toast.makeText(SignUpCook.this,"data inserted",Toast.LENGTH_SHORT).show();//show a success message if success
     }
 
     public void backToMain(){
