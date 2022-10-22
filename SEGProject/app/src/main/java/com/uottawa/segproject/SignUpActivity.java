@@ -10,6 +10,10 @@ import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.HashMap;
+import java.util.Map;
+
 //create client account
 public class SignUpActivity extends AppCompatActivity {
     DatabaseReference accountsDbRef;
@@ -38,6 +42,7 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     private void insertAccountData(){
+        Map<String, Object> update = new HashMap<>();
         String firstname=etFirstname.getText().toString();
         String lastname=etLastname.getText().toString();
         String password=etPassword.getText().toString();
@@ -46,9 +51,10 @@ public class SignUpActivity extends AppCompatActivity {
         long card=Long.parseLong(etCard.getText().toString());
 
         ClientAccount CA = new ClientAccount(firstname,lastname,email,password,address,card);
-
+        update.put(firstname+"/userType", "client");
         accountsDbRef.push().setValue(CA);// add this dummy class to the database
 
+        accountsDbRef.updateChildren(update);
         Toast.makeText(SignUpActivity.this,"data inserted",Toast.LENGTH_SHORT).show();//show a success message if success
     }
 

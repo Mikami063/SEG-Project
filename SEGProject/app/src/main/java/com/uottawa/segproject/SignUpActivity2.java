@@ -25,6 +25,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.HashMap;
+import java.util.Map;
 
 public class SignUpActivity2 extends AppCompatActivity {
     DatabaseReference accountsDbRef;
@@ -75,6 +77,7 @@ public class SignUpActivity2 extends AppCompatActivity {
 
 
     private void insertAccountData() throws IOException {
+        Map<String, Object> update = new HashMap<>();
         String firstname=etFirstname.getText().toString();
         String lastname=etLastname.getText().toString();
         String password=etPassword.getText().toString();
@@ -83,8 +86,9 @@ public class SignUpActivity2 extends AppCompatActivity {
         String description=etDescription.getText().toString();
 
         CookAccount CA = new CookAccount(firstname,lastname,email,password,address,description, bp);
-
+        update.put(firstname+"/userType", "cook");
         accountsDbRef.push().setValue(CA);// add this dummy class to the database
+        accountsDbRef.updateChildren(update);
 
         Toast.makeText(SignUpActivity2.this,"data inserted",Toast.LENGTH_SHORT).show();//show a success message if success
     }

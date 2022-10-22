@@ -36,6 +36,7 @@ public abstract class Account {
 	 */
 	protected String address;
 
+
 	/**
 	 * Default constructor
 	 */

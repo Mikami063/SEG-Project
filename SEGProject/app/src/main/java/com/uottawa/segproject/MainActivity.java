@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
 
     ArrayList<Account> accountList = new ArrayList<>();
 
+    String userType;
 
 
     ArrayList<Account> li= new ArrayList<>();
@@ -117,6 +118,7 @@ public class MainActivity extends AppCompatActivity {
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                 Account ob = snapshot.getValue(Account.class);
                 accountList.add(ob);
+                userType = snapshot.child("userType").getValue().toString();
             }
 
             @Override
@@ -159,6 +161,11 @@ public class MainActivity extends AppCompatActivity {
         String passName = login.getText().toString();
         //getAccountData(loginName);
 
+        if(userType == "client"){
+            // Put intent here
+        } else {
+
+        }
         Intent intent = new Intent(this, WelcomeMs.class);
         startActivity(intent);
     }
