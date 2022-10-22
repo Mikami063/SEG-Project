@@ -61,10 +61,21 @@ public class SignUpCook extends AppCompatActivity {
         etEmail=(EditText) findViewById(R.id.emailTxt2);
         etDescription=(EditText) findViewById(R.id.selfDescriptionTxt);
 
-        accountsDbRef= FirebaseDatabase.getInstance().getReference().child("Accounts");// get collection [Accounts] on database
-        insertAccountData();
+            if (!etFirstname.getText().toString().equals("") &&
+                    !etLastname.getText().toString().equals("") &&
+                    !etPassword.getText().toString().equals("") &&
+                    !etEmail.getText().toString().equals("") &&
+                    !etDescription.getText().toString().equals("") &&
+                    !etZIP.getText().toString().equals("")) {
 
-        backToMain();
+                accountsDbRef = FirebaseDatabase.getInstance().getReference().child("Accounts");// get collection [Accounts] on database
+                insertAccountData();
+
+                backToMain();
+            } else {
+                Toast.makeText(SignUpCook.this, "Please fill out all fields!", Toast.LENGTH_SHORT).show();
+            }
+
     }
 
 

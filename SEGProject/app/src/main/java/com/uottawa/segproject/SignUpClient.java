@@ -28,6 +28,7 @@ public class SignUpClient extends AppCompatActivity {
 
 
     public void onDoneClick(View view){
+
         etFirstname=(EditText) findViewById(R.id.firstnameTxt);
         etPassword=(EditText) findViewById(R.id.passwardTxt);
         etCard=(EditText) findViewById(R.id.cardTxt);
@@ -35,10 +36,28 @@ public class SignUpClient extends AppCompatActivity {
         etZIP=(EditText) findViewById(R.id.ZIPTxt);
         etEmail=(EditText) findViewById(R.id.emailTxt);
 
-        accountsDbRef= FirebaseDatabase.getInstance().getReference().child("Accounts");// get collection [Accounts] on database
-        insertAccountData();
+        try {
+            Long.parseLong(etCard.getText().toString());
+            if (!etFirstname.getText().toString().equals("") &&
+                    !etLastname.getText().toString().equals("") &&
+                    !etPassword.getText().toString().equals("") &&
+                    !etEmail.getText().toString().equals("") &&
+                    !etCard.getText().toString().equals("") &&
+                    !etZIP.getText().toString().equals("")) {
 
-        backToMain();
+                accountsDbRef = FirebaseDatabase.getInstance().getReference().child("Accounts");// get collection [Accounts] on database
+                insertAccountData();
+
+                backToMain();
+            } else {
+                Toast.makeText(SignUpClient.this, "Please fill out all fields!", Toast.LENGTH_SHORT).show();
+            }
+        } catch(NumberFormatException e){
+            Toast.makeText(SignUpClient.this, "Credit card field cannot contain alphabets.", Toast.LENGTH_SHORT).show();
+        }
+
+
+
     }
 
     private void insertAccountData(){
@@ -50,12 +69,16 @@ public class SignUpClient extends AppCompatActivity {
         String address=etZIP.getText().toString();
         long card=Long.parseLong(etCard.getText().toString());
 
-        ClientAccount CA = new ClientAccount(firstname,lastname,email,password,address,card);
-        update.put(firstname+"/userType", "client");
-        accountsDbRef.push().setValue(CA);// add this dummy class to the database
 
-        accountsDbRef.updateChildren(update);
-        Toast.makeText(SignUpClient.this,"data inserted",Toast.LENGTH_SHORT).show();//show a success message if success
+
+
+            ClientAccount CA = new ClientAccount(firstname, lastname, email, password, address, card);
+            update.put(firstname + "/userType", "client");
+            accountsDbRef.push().setValue(CA);// add this dummy class to the database
+
+            accountsDbRef.updateChildren(update);
+            Toast.makeText(SignUpClient.this, "data inserted", Toast.LENGTH_SHORT).show();//show a success message if success
+
     }
 
     public void backToMain(){
